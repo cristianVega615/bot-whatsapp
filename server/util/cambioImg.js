@@ -3,19 +3,24 @@ const { base64 } = require("./imgToBase64");
 const PATH_QR = __dirname + ".\\..\\bot.qr.png";
 
 function changeImg(socket) {
-  let changeValidation;
-
-  watch(PATH_QR, (eventType, filename) => {
-    if (filename && filename.endsWith(".png")) {
-      changeValidation = true;
-      setTimeout(() => {
-        changeValidation = false;
-      }, 5000);
-      if (socket) {
-        socket.emit("qr", base64());
+  try {
+    let changeValidation;
+  
+    watch(PATH_QR, (eventType, filename) => {
+      if (filename && filename.endsWith(".png")) {
+        changeValidation = true;
+        setTimeout(() => {
+          changeValidation = false;
+        }, 5000);
+        if (socket) {
+          socket.emit("qr", base64());
+        }
       }
-    }
-  });
+    });
+    
+  } catch (error) {
+    
+  }
 }
 
 function mainChangeImg(socket) {
@@ -25,7 +30,7 @@ function mainChangeImg(socket) {
         if (socket) {
           socket.emit("qr", base64());
         }
-      }, 5500);
+      }, 10500);
     } else {
       if (socket) {
         socket.emit("qr", base64());

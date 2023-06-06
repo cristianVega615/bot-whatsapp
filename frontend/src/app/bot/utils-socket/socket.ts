@@ -1,5 +1,3 @@
-
-
 import io, { Socket } from "socket.io-client";
 
 function socketInitiazize(): Socket {

@@ -6,7 +6,9 @@
   "scripts": {
     "pre-copy": "cd .. && npm run  copy.lib base-baileys-memory",
     "start": "node ./config/app.js && node ./index.js",
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "mode" : "node ./index.js"
+
   },
   "keywords": [],
   "dependencies": {

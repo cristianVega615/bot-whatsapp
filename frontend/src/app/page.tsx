@@ -1,12 +1,17 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import Img from '../components/Img'
+import Image from "next/image";
+import Link from "next/link";
+import Navbar from "../components/Navbar";
+import Introduce from "../components/Introduce";
+import CardOption from "../components/CardsOption";
+import Footer from "../components/Footer";
 
-export default function Home(): any {
+export default function Home() {
   return (
-    <main> 
-      <Link href="/bot" className='text-white'> Aqui es para irse hacia el bot</Link>
-      <p>aca esta </p>
-    </main>
-  )
+    <>
+      <Navbar />
+      <Introduce />
+      <CardOption />
+      <Footer />
+    </>
+  );
 }
