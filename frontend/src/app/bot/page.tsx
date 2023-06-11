@@ -5,7 +5,7 @@ import { blurQr } from "./image/blur.code";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 
-export default function Bot() {
+export default function BotRoot() {
   const [Qr, setQr] = useState<string>("");
   useEffect(() => {
     const socket = socketInitiazize();

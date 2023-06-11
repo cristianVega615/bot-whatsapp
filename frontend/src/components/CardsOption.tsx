@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function CardsOption() {
   return (
@@ -12,11 +12,12 @@ export default function CardsOption() {
               Bot Masivo
             </h3>
             <p className="mb-6">
-              Poder enviar mensaje a uno cantidad de personas preescritas en un archivo.
+              Poder enviar mensaje a uno cantidad de personas preescritas en un
+              archivo.
             </p>
-            <a href="#" className="block font-medium text-purple-600">
-              Know more
-            </a>
+            <Link href="/massive" className="block font-medium text-purple-60">
+              Bot Masivo
+            </Link>
           </div>
           <Image
             src="https://tailus.io/sources/blocks/end-image/preview/images/graphic.svg"
@@ -30,15 +31,15 @@ export default function CardsOption() {
         <div className="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
           <div className="mb-12 space-y-4">
             <h3 className="text-2xl font-semibold text-purple-900">
-                Bot con QR
+              Bot con QR
             </h3>
             <p className="mb-6">
-                En este apartado puede escanear el QR para que pueda conectar el bot.
+              En este apartado puede escanear el QR para que pueda conectar el
+              bot.
             </p>
             <Link href="/bot" className="block font-medium text-purple-600">
               Conectar con el QR
             </Link>
-
           </div>
           <Image
             src="https://tailus.io/sources/blocks/end-image/preview/images/ui-design.svg"

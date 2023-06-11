@@ -7,7 +7,7 @@ const flowSaludar = addKeyword([
   "Buenos dias",
   "que tal",
 ]).addAnswer(
-  "¡Hola! ¿Que tal? Somos Fazt Phone, una empresa que busca \ndar el mejor celular a menor precio 📱✨. \nContamos con las mejores marcas: Xiaomi, Realme\nLista: \n.1️⃣ Xiaomi (Escribe Celulares Xiaomi si quuieres verlo) \n2️⃣ Realme (Escribe Celulares Realme si quuieres verlo)"
+  "¡Hola! ¿Que tal? Somos Fazt Phone, una empresa que busca \ndar el mejor celular a menor precio 📱✨. \nContamos con las mejores marcas: Xiaomi, Realme\nLista: \n.1️⃣ Xiaomi (Escribe 'Celulares Xiaomi' si quuieres verlo) \n2️⃣ Realme (Escribe 'Celulares Realme' si quieres verlo)"
 );
 
 //? Flujo de Xiaomi
