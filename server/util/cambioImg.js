@@ -1,4 +1,5 @@
-const { access, constants, watch } = require("fs");
+const { watch } = require("fs");
+const {constants, access} = require("node:fs/promises")
 const { base64 } = require("./imgToBase64");
 const PATH_QR = __dirname + ".\\..\\bot.qr.png";
 
@@ -23,20 +24,16 @@ function changeImg(socket) {
   }
 }
 
-function mainChangeImg(socket) {
-  access(PATH_QR, constants.F_OK, function (err) {
-    if (err) {
-      setTimeout(() => {
-        if (socket) {
-          socket.emit("qr", base64());
-        }
-      }, 10500);
-    } else {
-      if (socket) {
-        socket.emit("qr", base64());
-      }
-    }
-  });
+async function mainChangeImg(socket) {
+  try {
+    await access(PATH_QR, constants.F_OK);
+    if (socket) {
+      socket.emit("qr", base64())
+      
+    } 
+  } catch (error) {
+    console.log(error)  
+  }
 }
 
 module.exports = {
