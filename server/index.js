@@ -1,11 +1,9 @@
 const express = require("express");
 const { config } = require("dotenv");
 const app = express();
-const { mainChangeImg } = require("./util/cambioImg");
 
 config();
 
-mainChangeImg()
 
 
 /**

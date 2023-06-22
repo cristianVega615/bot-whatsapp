@@ -2,6 +2,7 @@ const express = require("express");
 const { config } = require("dotenv");
 const { Server } = require("socket.io");
 const { changeImg, mainChangeImg } = require("../util/cambioImg");
+const { transferToDataJson } = require("../util/transferToJson");
 
 //* Configuración para poder tener las varaibles de entorno
 config();
@@ -16,11 +17,10 @@ const io = new Server(server_socket, {
 });
 
 io.on("connection", (socket) => {
-  // console.log("conectado");
   //! Funciones que evaluan cuando actuar y enviar el event socket.
-  mainChangeImg(socket)
-  changeImg(socket)
-
+  mainChangeImg(socket);
+  changeImg(socket);
+  transferToDataJson(socket)
 });
 
 console.log(process.env.PORT_SOCKET);
