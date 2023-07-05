@@ -2,6 +2,15 @@ const { writeFile, mkdir } = require("node:fs");
 const { access, constants, readFile } = require("node:fs/promises");
 const path = require("path");
 
+
+/**
+ * 
+ * @param {*} PATH -> La ruta hacia el fichero
+ * 
+ * @param {*} data -> Los datos que se tiene que guardar
+ * 
+ * ? Esta funcion sirve para el guardado de información.
+ */
 const writeFileJson = (PATH, data) => {
   writeFile(PATH, JSON.stringify(data), (err) => {
     if (err) {
@@ -13,10 +22,10 @@ const writeFileJson = (PATH, data) => {
 };
 
 const createJSON = async (object_socket_flows) => {
+  const { keyword, answer, user } = object_socket_flows;
   const PATH = path.join(
-    __dirname + `\\..\\flows-json\\${object_socket_flows.user}.json`
+  __dirname + `\\..\\flows-json\\${user.user}.json`
   );
-  const { keyword, answer } = object_socket_flows;
   let template;
 
   try {

@@ -1,7 +1,7 @@
 "use client";
 import { type flowsObject } from "@/interface/Interface.State";
 import { useRef } from "react";
-import {socketInitiazize} from '@/app/bot/utils-socket/socket'
+import {socketInitiazize} from '@/app/bot/utils/socket'
 
 export default function FormBot() {
   const inputOne = useRef<HTMLInputElement>(null)
@@ -12,11 +12,15 @@ export default function FormBot() {
   const getValueInputs = () => {
     if (inputOne.current && inputTwo.current) {
       const socket = socketInitiazize()
-      socket.emit("flows", {
-        keyword: inputOne.current.value,
-        answer: inputTwo.current.value,
-        user: localStorage.getItem("user")
-      })
+      let userParseJson = localStorage.getItem("user")
+
+      if (userParseJson) {
+        socket.emit("flows", {
+          keyword: inputOne.current.value,
+          answer: inputTwo.current.value,
+          user: JSON.parse(userParseJson)
+        })
+      } 
       console.log(inputOne.current?.value, inputTwo.current?.value)
       inputOne.current.value = ""
       inputTwo.current.value = ""

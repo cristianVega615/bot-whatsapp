@@ -16,6 +16,7 @@ const io = new Server(server_socket, {
   },
 });
 
+
 io.on("connection", (socket) => {
   //! Funciones que evaluan cuando actuar y enviar el event socket.
   mainChangeImg(socket);

@@ -1,7 +1,6 @@
 const { createBot, createProvider, createFlow } = require("@bot-whatsapp/bot");
 const { flows } = require("./flows/flows");
 
-const QRPortalWeb = require("@bot-whatsapp/portal");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const MockAdapter = require("@bot-whatsapp/database/mock");
 
