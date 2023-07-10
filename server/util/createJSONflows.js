@@ -24,7 +24,7 @@ const writeFileJson = (PATH, data) => {
 const createJSON = async (object_socket_flows) => {
   const { keyword, answer, user } = object_socket_flows;
   const PATH = path.join(
-  __dirname + `\\..\\flows-json\\${user.user}.json`
+  __dirname + `\\..\\flows-json\\${user}.json`
   );
   let template;
 

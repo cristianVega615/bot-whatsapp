@@ -1,5 +1,6 @@
 import './globals.css'
 import { Roboto } from 'next/font/google'
+import {ContextApp} from '@/components/Context/ContextApp'
 
 const inter = Roboto({
   weight: '400',
@@ -17,8 +18,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ContextApp>
+          {children}
+        </ContextApp>
+      </body>
     </html>
+    </>
   )
 }

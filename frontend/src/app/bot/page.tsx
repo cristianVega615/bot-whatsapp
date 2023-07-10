@@ -1,61 +1,65 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { socketInitiazize } from "./utils/socket";
+import { socketInitiazize } from "../../utils/socket";
 import { blurQr } from "./image/blur.code";
-import { obtenerValor, guardarValor_Exp } from "./utils/toke.user";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import FormBot from "@/components/bot-components/FormBot";
 import { url_dev } from "../../../config.url";
+import { useReturnContext } from "@/components/Context/ContextApp";
+import { ContextApp } from "@/interface/Interface";
 
 export default function BotRoot() {
   const [Qr, setQr] = useState<string>("");
   const [flowsApper, setFlowsApper] = useState(false);
-  let timerRef = useRef<any>(null);
+  const [user, setUser] = useState("");
 
+  const { func_change, value_state } = useReturnContext();
+
+  let set_cookie = async (): Promise<{
+    auth: boolean;
+    type: string;
+  }> => {
+    let responseJSON = await fetch(`${url_dev.backend_express}/bot-session`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
+      },
+      mode: "cors",
+      credentials: "include",
+    });
+
+    let response = await responseJSON.json();
+    return response;
+  };
   const createflows = () => {
     setFlowsApper(!flowsApper);
   };
 
   useEffect(() => {
     const socket = socketInitiazize();
+
     socket.on("qr", (msg) => {
       setQr(`data:image/jpeg;base64,${msg}`);
     });
-
-    const set_cookie = async (data: any) => {
-      console.log(data)
-      await fetch(`${url_dev.backend_express}/bot-session`, {
-
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Origin": "http://localhost:3200",
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
-        },
-        mode: "cors",
-        body: JSON.stringify({
-          data
-        }),
-      });
-    };
-    const userFree = obtenerValor("user");
-    if (!userFree) {
-      guardarValor_Exp("user", `user-${crypto.randomUUID()}`, 72);
-      set_cookie(userFree);
-    }
-    // console.log(userFree);
-    set_cookie(userFree);
-    timerRef.current = setTimeout(() => {
-      obtenerValor("user");
-    }, 72 * 60 * 1000);
 
     return () => {
       socket.disconnect();
     };
   }, []);
 
+  useEffect(() => {
+    set_cookie().then((response) => {
+      if (!response.auth) {
+        window.location.href = url_dev.url_page_main + "/login";
+      }
+    });
+
+    return () => {};
+  }, []);
   return (
     <>
       <div className="w-full p-6">
@@ -82,7 +86,7 @@ export default function BotRoot() {
               Nuevo Flujo
             </button>
           </div>
-          <div className="">{flowsApper && <FormBot />}</div>
+          <div className="">{flowsApper && <FormBot user={user} />}</div>
         </div>
       </main>
       <Footer />

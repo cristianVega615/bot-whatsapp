@@ -4,8 +4,8 @@ const isAuthenticate = (req, res, next) => {
     console.log("pasa por aca");
     next();
   } else {
-    console.log(res.getHeaders())
-    res.redirect("localhost:3200");
+    req.session.authenticate = false
+    next()
   }
 };
 
