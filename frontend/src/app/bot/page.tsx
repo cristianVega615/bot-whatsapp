@@ -18,7 +18,7 @@ export default function BotRoot() {
 
   let set_cookie = async (): Promise<{
     auth: boolean;
-    type: string;
+    user: string;
   }> => {
     let responseJSON = await fetch(`${url_dev.backend_express}/bot-session`, {
       method: "GET",
@@ -55,6 +55,8 @@ export default function BotRoot() {
     set_cookie().then((response) => {
       if (!response.auth) {
         window.location.href = url_dev.url_page_main + "/login";
+      } else {
+        setUser(response.user)
       }
     });
 
